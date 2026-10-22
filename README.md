@@ -30,8 +30,8 @@ flowchart TD
     E -->|Yes| F["Maintain Compliant Status"]
     E -->|No| G["HTTP POST Webhook pointing to containerized n8n Workflow"]
 
-    G --> H["Parse & Normalize JSON"]
-    H --> I["Extract Network & Routing Data"]
+    G --> H["Parse & Normalize XML/JSON output from endpoint management software"]
+    H --> I["Determines which agents should be included in email"]
     I --> J["Email Administrator<br/>with Dynamic Configuration Form"]
 
     J --> K["Validate Deployment Configuration"]
