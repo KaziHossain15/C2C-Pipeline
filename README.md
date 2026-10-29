@@ -24,7 +24,7 @@ flowchart TD
     A["Splunk Network Telemetry"] --> C["Data formatting/normalization"]
     B["Endpoint Management Platform Data/<br/>Security Agent Database Records"] --> C
 
-    C --> D["Hostname-Based Data Join"]
+    C --> D["Hostname Based Data Join"]
     D --> E{"Security Agent<br/>Present?"}
 
     E -->|Yes| F["Maintain Compliant Status"]
