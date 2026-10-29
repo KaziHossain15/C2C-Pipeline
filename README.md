@@ -21,7 +21,7 @@ The pipeline connects security telemetry, asset correlation, workflow orchestrat
 
 ```mermaid
 flowchart TD
-    A["Splunk<br/>Network Telemetry"] --> C["Asset Correlation Engine"]
+    A["Splunk Network Telemetry<br/>Endpoint Management Platform Data"] --> C["Asset Correlation Engine"]
     B["Endpoint Security Databases<br/>Agent & Compliance Records"] --> C
 
     C --> D["Hostname-Based Data Join"]
