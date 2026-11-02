@@ -3,11 +3,11 @@ Comply to Connect pipeline design structure and overview
 
 # Automated Endpoint Compliance & Remediation Pipeline
 
-An automated, closed-loop endpoint compliance solution integrating **Splunk, n8n, and REST APIs** to identify unmanaged devices, coordinate endpoint agent deployment, and continuously validate remediation.
+An automated, closed-loop endpoint compliance solution integrating **SIEM, n8n, and REST APIs** to identify unmanaged devices, coordinate endpoint agent deployment, and continuously validate remediation.
 
 ## Overview
 
-This project ensures that active devices across the environment complied with established security baselines. Network telemetry was collected in **Splunk**, while endpoint security tools maintained separate records of agent deployment and device compliance.
+This project ensures that active devices across the environment complied with established security baselines. Network telemetry was collected in **SIEM**, while endpoint security tools maintained separate records of agent deployment and device compliance.
 
 Manually correlating millions of log events with endpoint security records was inefficient and made it difficult to identify unmanaged or non-compliant machines before they became security risks.
 
@@ -21,7 +21,7 @@ The pipeline connects security telemetry, asset correlation, workflow orchestrat
 
 ```mermaid
 flowchart TD
-    A["Splunk Network Telemetry"] --> C["Data formatting/normalization"]
+    A["SIEM Network Telemetry"] --> C["Data formatting/normalization"]
     B["Endpoint Management Platform Data/<br/>Security Agent Database Records"] --> C
 
     C --> D["Hostname Based Data Join"]
@@ -148,7 +148,7 @@ In a production implementation, retry limits, timeouts, API errors, and escalati
 
 | Technology                       | Role                                                                      |
 | -------------------------------- | ------------------------------------------------------------------------- |
-| **Splunk**                       | Network telemetry queries and active-device discovery                     |
+| **SIEM**                         | Network telemetry queries and active-device discovery                     |
 | **n8n**                          | Workflow orchestration and automated remediation                          |
 | **JSON**                         | Structured data extraction, transformation, and payload normalization     |
 | **REST APIs**                    | Integration with endpoint management and installation-status verification |
