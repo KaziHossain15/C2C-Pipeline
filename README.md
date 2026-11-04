@@ -30,7 +30,7 @@ flowchart LR
 
     subgraph RM["n8n Remediation"]
         direction TB
-        N1["Webhook Trigger"] --> N2["JSON/XML Parsing &<br/>Schema Normalization"] --> N3["Admin Email +<br/>Dynamic Config Form"] --> N4["Endpoint Management<br/>REST API"] --> N5["Remote Agent<br/>Installation"]
+        N1["Webhook Trigger"] --> N2["Admin Email +<br/>Dynamic Config Form"] --> N3["Endpoint Management<br/>REST API"] --> N4["Remote Agent<br/>Installation"]
     end
 
     subgraph CV["Compliance Validation"]
