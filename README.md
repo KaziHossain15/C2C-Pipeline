@@ -15,6 +15,54 @@ I developed a data-driven automation approach to streamline asset discovery, coo
 
 The solution combined data correlation, custom JSON parsing, workflow automation, administrator approval, and continuous API-based validation.
 
+## Architecture at a Glance
+
+```mermaid
+flowchart BT
+    subgraph L1["Layer 1 · Data Sources"]
+        direction LR
+        S1["SIEM (Splunk)<br/>Network Telemetry"]
+        S2["Endpoint Management Platform /<br/>Security Agent Records"]
+    end
+
+    subgraph L2["Layer 2 · Correlation & Processing"]
+        direction LR
+        P1["Data Formatting &<br/>Normalization"]
+        P2["Hostname-Based<br/>Data Join"]
+        P3["Unmanaged Device<br/>Detection"]
+    end
+
+    subgraph L3["Layer 3 · Orchestration (Containerized n8n)"]
+        direction LR
+        O1["HTTP POST<br/>Webhook Trigger"]
+        O2["JSON/XML Parsing &<br/>Schema Normalization"]
+        O3["Admin Email +<br/>Dynamic Config Form"]
+    end
+
+    subgraph L4["Layer 4 · Remediation & Validation"]
+        direction LR
+        M1["Endpoint Management<br/>REST API"]
+        M2["Remote Agent<br/>Installation"]
+        M3["Status Polling<br/>(Retry / Timeout / Escalate)"]
+    end
+
+    subgraph L5["Layer 5 · Compliance & Reporting"]
+        direction LR
+        R1["Asset Inventory<br/>Update"]
+        R2["Centralized<br/>Compliance Registry"]
+    end
+
+    L1 --> L2 --> L3 --> L4 --> L5
+
+    style L1 fill:#e8f1ff,stroke:#3973ac,color:#172b4d
+    style L2 fill:#e8f1ff,stroke:#3973ac,color:#172b4d
+    style L3 fill:#eee7ff,stroke:#7954a1,color:#30204a
+    style L4 fill:#eee7ff,stroke:#7954a1,color:#30204a
+    style L5 fill:#dff5e5,stroke:#318653,color:#174d2c
+```
+
+
+
 ## Architecture
 
 The pipeline connects security telemetry, asset correlation, workflow orchestration, endpoint management, and compliance verification into a single remediation process.
