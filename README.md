@@ -63,7 +63,7 @@ flowchart TB
 
 
 
-## Architecture
+## In-depth Process
 
 The pipeline connects security telemetry, asset correlation, workflow orchestration, endpoint management, and compliance verification into a single remediation process.
 
