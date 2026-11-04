@@ -19,48 +19,39 @@ The solution combined data correlation, custom JSON parsing, workflow automation
 
 ```mermaid
 flowchart LR
-    subgraph L1["Layer 1 · Data Sources"]
-        direction LR
-        S1["SIEM (Splunk)<br/>Network Telemetry"]
-        S2["Endpoint Management Platform /<br/>Security Agent Records"]
+    S1["SIEM<br/>Network Telemetry"]
+    S2["Endpoint Management<br/>Platform"]
+    S3["Security Agent<br/>Data"]
+
+    subgraph DE["Data Engine"]
+        direction TB
+        D1["Formatting &<br/>Normalization"] --> D2["Hostname-Based<br/>Data Join"] --> D3["Unmanaged Device<br/>Detection"]
     end
 
-    subgraph L2["Layer 2 · Correlation & Processing"]
-        direction LR
-        P1["Data Formatting &<br/>Normalization"]
-        P2["Hostname-Based<br/>Data Join"]
-        P3["Unmanaged Device<br/>Detection"]
+    subgraph RM["n8n Remediation"]
+        direction TB
+        N1["Webhook Trigger"] --> N2["JSON/XML Parsing &<br/>Schema Normalization"] --> N3["Admin Email +<br/>Dynamic Config Form"] --> N4["Endpoint Management<br/>REST API"] --> N5["Remote Agent<br/>Installation"]
     end
 
-    subgraph L3["Layer 3 · Orchestration (Containerized n8n)"]
-        direction LR
-        O1["HTTP POST<br/>Webhook Trigger"]
-        O2["JSON/XML Parsing &<br/>Schema Normalization"]
-        O3["Admin Email +<br/>Dynamic Config Form"]
+    subgraph CV["Compliance Validation"]
+        direction TB
+        V1["Query Installation<br/>Status"] --> V2{"Installation<br/>Verified?"}
+        V2 -->|No| V1
+        V2 -->|Yes| V3["Update Asset<br/>Inventory"] --> V4["Centralized<br/>Compliance Registry"]
     end
 
-    subgraph L4["Layer 4 · Remediation & Validation"]
-        direction LR
-        M1["Endpoint Management<br/>REST API"]
-        M2["Remote Agent<br/>Installation"]
-        M3["Status Polling<br/>(Retry / Timeout / Escalate)"]
-    end
+    S1 --> DE
+    S2 --> DE
+    S3 --> DE
+    DE --> RM --> CV
 
-    subgraph L5["Layer 5 · Compliance & Reporting"]
-        direction LR
-        R1["Asset Inventory<br/>Update"]
-        R2["Centralized<br/>Compliance Registry"]
-    end
+    classDef source fill:#e8f1ff,stroke:#3973ac,color:#172b4d
+    class S1,S2,S3 source
 
-    L1 --> L2 --> L3 --> L4 --> L5
-
-    style L1 fill:#e8f1ff,stroke:#3973ac,color:#172b4d
-    style L2 fill:#e8f1ff,stroke:#3973ac,color:#172b4d
-    style L3 fill:#eee7ff,stroke:#7954a1,color:#30204a
-    style L4 fill:#eee7ff,stroke:#7954a1,color:#30204a
-    style L5 fill:#dff5e5,stroke:#318653,color:#174d2c
+    style DE fill:#e8f1ff,stroke:#3973ac,color:#172b4d
+    style RM fill:#eee7ff,stroke:#7954a1,color:#30204a
+    style CV fill:#dff5e5,stroke:#318653,color:#174d2c
 ```
-
 
 
 ## In-depth Process
