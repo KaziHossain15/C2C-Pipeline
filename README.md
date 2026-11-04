@@ -5,8 +5,6 @@ A closed-loop Comply-to-Connect (C2C) pipeline that finds active devices missing
 ![Splunk](https://img.shields.io/badge/Splunk-SIEM-black?logo=splunk)
 ![n8n](https://img.shields.io/badge/n8n-Workflow_Automation-EA4B71?logo=n8n&logoColor=white)
 ![Podman](https://img.shields.io/badge/Podman-Containerized-892CA0?logo=podman&logoColor=white)
-![REST API](https://img.shields.io/badge/REST-API-4c8eda)
-![JSON](https://img.shields.io/badge/JSON-Data_Processing-000000?logo=json)
 
 ## At a Glance
 
