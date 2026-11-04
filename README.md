@@ -18,7 +18,7 @@ The solution combined data correlation, custom JSON parsing, workflow automation
 ## Architecture at a Glance
 
 ```mermaid
-flowchart TB
+flowchart LR
     subgraph L1["Layer 1 · Data Sources"]
         direction LR
         S1["SIEM (Splunk)<br/>Network Telemetry"]
