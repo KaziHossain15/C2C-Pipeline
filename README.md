@@ -105,11 +105,11 @@ flowchart TD
 
 ## How It Works
 
-### 1. Find unmanaged devices
+### 1. Find unmanaged devices and data engine
 
 I queried Splunk network telemetry to build a list of devices that were active on the network, then joined it with endpoint management and security agent records using hostname as the correlation key. Any active device with no matching agent record was flagged as potentially non-compliant. This turned a large volume of raw log data into a short and actionable list.
 
-### 2. Normalize the data in n8n
+### 2. n8n process
 
 Each flagged device is sent by HTTP POST webhook to a containerized n8n workflow. Custom logic in the workflow parses the raw XML/JSON output from the endpoint management software, extracts the relevant network and routing attributes, normalizes field names, and reshapes the result into the payload schema the endpoint management API expects. This step lets data from systems with different formats flow through one remediation process.
 
