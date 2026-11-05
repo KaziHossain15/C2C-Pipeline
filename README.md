@@ -8,15 +8,15 @@ A closed-loop Comply-to-Connect (C2C) pipeline that finds active devices missing
 
 ## At a Glance
 
-**Problem:** Network telemetry lived in Splunk while agent deployment and compliance records lived in separate endpoint tools. Finding unmanaged machines meant manually correlating millions of log events against those records.
+**Problem:** Our data was fragmented: network telemetry in Splunk, agent and compliance records in separate endpoint tools. Without a unified view, unmanaged machines were effectively invisible, and finding them meant manually correlating millions of log events against inventory records.
 
-**What I built:** A pipeline that joins the datasets by hostname, flags devices without required agents, and triggers an n8n workflow that emails an administrator, deploys the agent through a REST API, and polls until the install is confirmed.
+**What I built:** A pipeline that joins the datasets by hostname, flags devices without required agents, and triggers an n8n workflow that emails an administrator, deploys the agent through a REST API, validates until the install is confirmed, ending up being a continuous vetting cycle.
 
-**Outcome:** Compliance checking moved from manual audits to a repeatable workflow. IT staff no longer start each deployment by hand, and the asset inventory reflects verified installs instead of submitted requests.
+**Outcome:** Compliance checking moved from manual audits to a repeatable workflow. The IT staff no longer start each deployment by hand, and the asset inventory reflects verified installs instead of submitted requests.
 
 ### Skills demonstrated
 
-Security engineering and endpoint compliance · SIEM querying (Splunk) · data correlation and normalization · workflow automation (n8n) · REST API integration · JSON/XML parsing and schema transformation · containerized services (Podman) · human-in-the-loop approval design · retry, timeout, and failure handling · audit logging
+Security engineering and endpoint compliance · SIEM querying (Splunk) · data correlation and normalization · workflow automation (n8n) · REST API integration · JSON/XML parsing and schema transformation · containerized services (Podman) · retry, timeout, and failure handling · audit logging
 
 ## Architecture
 
@@ -107,7 +107,7 @@ flowchart TD
 
 ### 1. Find unmanaged devices
 
-I queried Splunk network telemetry to build a list of devices that were active on the network, then joined it with endpoint management and security agent records using hostname as the correlation key. Any active device with no matching agent record was flagged as potentially non-compliant. This turned a large volume of raw log data into a short, actionable list.
+I queried Splunk network telemetry to build a list of devices that were active on the network, then joined it with endpoint management and security agent records using hostname as the correlation key. Any active device with no matching agent record was flagged as potentially non-compliant. This turned a large volume of raw log data into a short and actionable list.
 
 ### 2. Normalize the data in n8n
 
@@ -119,7 +119,7 @@ The workflow works out which agents the device is missing and emails the respons
 
 ### 4. Deploy through the REST API
 
-With a validated configuration, n8n sends a structured deployment request to the endpoint management platform's REST API, which installs the security agent remotely. No technician has to start the installation on the machine.
+With a validated configuration, n8n sends a structured deployment request to the endpoint management platform's REST API, which installs the security agent remotely. 
 
 ### 5. Verify before marking compliant
 
